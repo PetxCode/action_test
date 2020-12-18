@@ -9,6 +9,7 @@ function App() {
         <p>
           <h2>Hello BDCL</h2>
           Edit <code>src/App.js</code> and save to reload.
+          <h2>I so live coding....💌</h2>
         </p>
         <a
           className="App-link"
