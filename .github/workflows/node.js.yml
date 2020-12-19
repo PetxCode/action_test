@@ -27,6 +27,23 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-      env:
-        FIREBASE_TOKEN: ${ (secrets.FIREBASE_TOKEN)}
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubunto-latest
+    
+    steps: 
+      - name: Checkout repository
+        uses: action/checkout@main
+      - name: Download artifact
+        uses: action/download-artifact@main
+        with:
+          name: dist
+          path: dist        
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          arge: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${ (secrets.FIREBASE_TOKEN)}
 
